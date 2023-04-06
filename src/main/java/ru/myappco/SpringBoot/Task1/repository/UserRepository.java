@@ -23,8 +23,11 @@ public class UserRepository {
     }
 
     public List<Authorities> getUserAuthorities(String user, String password) {
-        if (database.containsKey(user))
-            return database.get(user).getAuthorities();
+        if (database.containsKey(user)) {
+            if (database.get(user).getPassword().equals(password))
+                return database.get(user).getAuthorities();
+            return new ArrayList<>();
+        }
         else
             return new ArrayList<>();
     }
