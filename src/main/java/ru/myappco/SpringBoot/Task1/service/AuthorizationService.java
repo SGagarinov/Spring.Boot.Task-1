@@ -1,6 +1,7 @@
 package ru.myappco.SpringBoot.Task1.service;
 
 import org.springframework.stereotype.Service;
+import ru.myappco.SpringBoot.Task1.entity.User;
 import ru.myappco.SpringBoot.Task1.enums.Authorities;
 import ru.myappco.SpringBoot.Task1.exception.InvalidCredentials;
 import ru.myappco.SpringBoot.Task1.exception.UnauthorizedUser;
@@ -17,11 +18,11 @@ public class AuthorizationService {
         userRepository.init();
     }
 
-    public List<Authorities> getAuthorities(String user, String password) {
-        if (isEmpty(user) || isEmpty(password)) {
+    public List<Authorities> getAuthorities(User user) {
+        if (isEmpty(user.getLogin()) || isEmpty(user.getPassword())) {
             throw new InvalidCredentials("User name or password is empty");
         }
-        List<Authorities> userAuthorities = userRepository.getUserAuthorities(user, password);
+        List<Authorities> userAuthorities = userRepository.getUserAuthorities(user.getLogin(), user.getPassword());
         if (isEmpty(userAuthorities)) {
             throw new UnauthorizedUser("Unknown user " + user);
         }

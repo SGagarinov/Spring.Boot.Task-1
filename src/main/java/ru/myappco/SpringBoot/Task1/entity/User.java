@@ -1,17 +1,26 @@
 package ru.myappco.SpringBoot.Task1.entity;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import ru.myappco.SpringBoot.Task1.enums.Authorities;
 
 import java.util.List;
 
 public class User {
 
+    @Size(min=2, max = 10)
     private String login;
+    @NotBlank(message = "password is required.")
     private String password;
 
     private List<Authorities> authorities;
 
     public User() {
+    }
+
+    public User(String login, String password) {
+        this.login = login;
+        this.password = password;
     }
 
     public User(String login, String password, List<Authorities> authorities) {
