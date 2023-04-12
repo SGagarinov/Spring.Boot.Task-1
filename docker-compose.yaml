@@ -1,0 +1,10 @@
+version: '1.2'
+
+services:
+  mydockerapp:
+    image: 'mydocker:first'
+    container_name: 'mydoc'
+    ports:
+      - '8899:8899'
+    environment:
+      NETOLOGY_PROFILE_DEV: false
